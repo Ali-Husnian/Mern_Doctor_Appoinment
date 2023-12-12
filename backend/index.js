@@ -3,6 +3,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import authRouter from "./Routes/authRouter.js";
+import morgan from "morgan";
 
 dotenv.config();
 
@@ -19,9 +21,13 @@ app.get("/", (req, res) => {
 });
 
 // middleware
-app.use(express());
+app.use(express.json());
 app.use(cookieParser());
 app.use(cors(corsOptions));
+app.use(morgan("dev"));
+
+// route middleware
+app.use("/api/v1/auth", authRouter);
 
 // mongodb connection
 const DB = process.env.DATABASE_URL.replace(
@@ -38,4 +44,20 @@ mongoose
 
 app.listen(port, () => {
   console.log(`App running on port ${port}....`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log(err.name, err.message);
+  console.log("UNHANDLED REJECTION! 💥 shutting down...");
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+process.on("uncaughtException", (err) => {
+  console.log(err.name, err.message);
+  console.log("UNHANDLED EXCEPTION! 💥 shutting down...");
+  server.close(() => {
+    process.exit(1);
+  });
 });

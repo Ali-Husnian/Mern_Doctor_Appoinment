@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const reviewSchema = new mongoose.Schema(
   {
     doctor: {
-      type: mongoose.Model.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "Doctor",
     },
     user: {
-      type: mongoose.Model.ObjectId,
+      type: mongoose.Types.ObjectId,
       ref: "User",
     },
     reviewText: {
