@@ -3,8 +3,9 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import authRouter from "./Routes/authRouter.js";
 import morgan from "morgan";
+import authRouter from "./Routes/authRouter.js";
+import userRouter from "./Routes/userRouter.js";
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ app.use(morgan("dev"));
 
 // route middleware
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/users", userRouter);
 
 // mongodb connection
 const DB = process.env.DATABASE_URL.replace(
