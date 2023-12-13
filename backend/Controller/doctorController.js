@@ -1,24 +1,25 @@
-import User from "./../models/UserSchema.js";
+import Doctor from "../models/DoctorSchema.js";
 
-// Update user
-export const UpdateUser = async (req, res) => {
+// Update Doctor
+export const UpdateDoctor = async (req, res) => {
   const id = req.params.id;
   try {
-    const updateuser = await User.findByIdAndUpdate(
+    const up_doctor = await Doctor.findByIdAndUpdate(
       id,
       { $set: req.body },
       { new: true }
     );
-    if (!updateuser)
+
+    if (!up_doctor)
       return res.status(404).json({
-        message: "User not found with that ID.",
+        message: "Doctor not found with that ID.",
         status: false,
       });
     else
       res.status(201).json({
         status: "success",
         message: "Update successfully",
-        data: updateuser,
+        data: up_doctor,
       });
   } catch (error) {
     res.status(500).json({
@@ -27,16 +28,16 @@ export const UpdateUser = async (req, res) => {
     });
   }
 };
-// Delete user
-export const DeleteUser = async (req, res) => {
+// Delete Doctor
+export const DeleteDoctor = async (req, res) => {
   const id = req.params.id;
   try {
-    const deleteuser = await User.findByIdAndDelete(id);
+    const del_doctor = await Doctor.findByIdAndDelete(id);
 
-    if (!deleteuser)
+    if (!del_doctor)
       return res.status(404).json({
         status: false,
-        message: `User not found with that ID.`,
+        message: `Doctor not found with that ID.`,
       });
     else
       res.status(204).json({
@@ -51,21 +52,33 @@ export const DeleteUser = async (req, res) => {
     });
   }
 };
-// Get all users
-export const GetAllUsers = async (req, res) => {
+// Get all Doctor
+export const GetAllDoctor = async (req, res) => {
   try {
-    const users = await User.find().select("-password");
-    if (!users || users.length === 0)
+    const { query } = req.query;
+    let doctors;
+
+    if (query)
+      doctors = await Doctor.find({
+        isApproved: "approved",
+        $or: [
+          { name: { $regex: query, $options: "i" } },
+          { speciality: { $regex: query, $options: "i" } },
+        ],
+      }).select("-password");
+    else doctors = await Doctor.find().select("-password");
+
+    if (!doctors || doctors.length === 0)
       return res.status(404).json({
-        status: "failed",
-        message: "No Users found",
+        status: false,
+        message: "No doctor found",
       });
     else
       res.status(200).json({
         status: "succes",
-        message: "Getting all users was successful!",
-        count: users.length,
-        data: users,
+        message: "Getting all doctor was successful!",
+        count: doctors.length,
+        data: doctors,
       });
   } catch (err) {
     console.log(err);
@@ -76,22 +89,22 @@ export const GetAllUsers = async (req, res) => {
   }
 };
 
-// Get one User
-export const GetOneUser = async (req, res) => {
+// Get one Doctor
+export const GetOneDoctor = async (req, res) => {
   const id = req.params.id;
   try {
-    const getUser = await User.findById(id).select("-password");
+    const getDoctor = await Doctor.findById(id).select("-password");
 
-    if (!getUser)
+    if (!getDoctor)
       return res.status(404).json({
         status: false,
-        message: `User not found with that ID.`,
+        message: `Doctor not found with that ID.`,
       });
     else
       res.status(200).json({
         status: "success",
         message: "Get user successfully",
-        data: getUser,
+        data: getDoctor,
       });
   } catch (error) {
     res.status(500).json({

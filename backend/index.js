@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import authRouter from "./Routes/authRouter.js";
 import userRouter from "./Routes/userRouter.js";
+import doctorRouter from "./Routes/doctorRouter.js";
 
 dotenv.config();
 
@@ -30,6 +31,7 @@ app.use(morgan("dev"));
 // route middleware
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
+app.use("/api/v1/doctors", doctorRouter);
 
 // mongodb connection
 const DB = process.env.DATABASE_URL.replace(
