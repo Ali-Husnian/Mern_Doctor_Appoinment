@@ -59,9 +59,11 @@ export const signup = async (req, res) => {
       },
     });
   } catch (error) {
-    res
-      .status(500)
-      .json({ status: false, message: "Internal server error. Try again" });
+    res.status(500).json({
+      status: false,
+      // err: error.massage,
+      message: "Internal server error. Try again",
+    });
   }
 };
 
