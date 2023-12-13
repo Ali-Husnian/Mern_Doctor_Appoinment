@@ -93,7 +93,9 @@ export const GetAllDoctor = async (req, res) => {
 export const GetOneDoctor = async (req, res) => {
   const id = req.params.id;
   try {
-    const getDoctor = await Doctor.findById(id).select("-password");
+    const getDoctor = await Doctor.findById(id)
+      .populate("reviews")
+      .select("-password");
 
     if (!getDoctor)
       return res.status(404).json({

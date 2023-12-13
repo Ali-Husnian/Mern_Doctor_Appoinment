@@ -6,9 +6,13 @@ import {
   GetAllDoctor,
   GetOneDoctor,
 } from "../Controller/doctorController.js";
+
 import { authentication, restrictTo } from "./../Controller/authVerify.js";
+import reviewRouter from "./reviewRouter.js";
 
 const router = express.Router();
+// nested route
+router.use("/:doctorId/reviews", reviewRouter);
 
 router.get("/", GetAllDoctor);
 router.get("/:id", GetOneDoctor);
