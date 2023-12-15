@@ -25,6 +25,7 @@ const SignUp = () => {
     console.log(file);
   };
   const submitHeandler = (event) => {
+    console.log(formData)
     event.preventDefault();
   };
   return (

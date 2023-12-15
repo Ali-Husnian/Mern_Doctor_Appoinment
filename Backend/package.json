@@ -1,15 +1,14 @@
 {
-  "name": "medicare-booking",
+  "name": "madicare-booking",
   "version": "1.0.0",
   "description": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "start-dev": "nodemon index.js"
+    "start:dev": "nodemon index.js"
   },
-  "author": "Fawad Ahmad",
+  "author": "Ali Husnain",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,6 +19,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.3.0",
     "mongoose": "^8.0.3",
-    "nodemon": "^3.0.2"
+    "morgan": "^1.10.0"
   }
 }
