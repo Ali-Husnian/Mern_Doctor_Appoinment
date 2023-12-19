@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import HashLoader from "react-spinners/HashLoader";
 import { toast } from "react-toastify";
 import uploadImagesCloudinary from "../utils/uploadCloudinary";
-import BASEURL from "../../config";
+import { BASEURL } from "./../config";
 
 const SignUp = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -115,6 +115,7 @@ const SignUp = () => {
             <h3 className="text-[22px] font-bold mb-10 leading-9 text-headingColor">
               Create an<span className="text-primaryColor">account</span>
             </h3>
+
             <form onSubmit={submitHeandler}>
               <div className="mb-5">
                 <input
@@ -196,7 +197,7 @@ const SignUp = () => {
                     name="photo"
                     id="customFile"
                     onChange={heandleFileInputChang}
-                    accept=".png, .jpg"
+                    accept=".png, ,.gif ,.jpg"
                     className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
                   />
                   <label
