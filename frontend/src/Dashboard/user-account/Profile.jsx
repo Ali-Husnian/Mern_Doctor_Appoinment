@@ -93,7 +93,8 @@ const Profile = ({ user }) => {
             placeholder="Enter your email"
             value={formData.email}
             onChange={heandleInputChang}
-            required
+            aria-readonly
+            readOnly
             className="w-full py-3 pr-4 border-b border-solid border-[#0066ff61] focus:outline-none focus:border-b-primaryColor text-[16px]  leading-7 text-headingColor placeholder:text-textColor cursor-pointer"
           />
         </div>
@@ -161,7 +162,7 @@ const Profile = ({ user }) => {
               htmlFor="customFile"
               className="absolute top-0 left-0 w-full h-full flex items-center px-[0.75rem] py-[0.375rem] text-[15px] leading-6 overflow-hidden bg-[#0066ff46] text-headingColor font-semibold rounded-lg truncate cursor-pointer"
             >
-              Upload Photo
+              {selectedFile ? selectedFile.name : "Upload Photo"}
             </label>
           </div>
         </div>
